@@ -27,4 +27,3 @@ public abstract class User {
         System.out.println(role + " logged out successfully.");
     }
 }
-
