@@ -15,6 +15,10 @@ public class Trainer {
     public int getTrainerId() {
         return trainerId;
     }
+    public String getSpecialty() {
+        return specialty;
+    }
+
     public void showTrainer() {
         System.out.println("\n--- Trainer Profile ---");
         System.out.println("ID: " + trainerId + " \nName: " + name + " \nSpecialty: " + specialty);
