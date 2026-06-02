@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class MemberShip {
     public int planId;
@@ -12,8 +13,8 @@ public class MemberShip {
         this.planName = planName;
         this.duration = duration;
         this.fee = fee;
-        this.expiryDate = expiryDate;
-        this.expiryDate = LocalDate.now().plusMonths(duration).toString();
+        this.expiryDate = LocalDate.now().plusMonths(duration)
+                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public void createPlan() {
@@ -21,10 +22,34 @@ public class MemberShip {
     }
 
     public void checkExpiry() {
-        System.out.println("Expiry Date: " + expiryDate);
+        try {
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate expiry = LocalDate.parse(expiryDate, fmt);
+            LocalDate today = LocalDate.now();
+
+            System.out.println("Plan Name   : " + planName);
+            System.out.println("Expiry Date : " + expiryDate);
+
+            if (today.isAfter(expiry)) {
+                System.out.println("Status      : *** EXPIRED *** (Expired on " + expiryDate + ")");
+            } else {
+                long daysLeft = today.until(expiry).toTotalMonths();
+                System.out.println("Status      : ACTIVE (Approx " + daysLeft + " month(s) remaining)");
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR: Could not parse expiry date - " + e.getMessage());
+        }
     }
 
     public void renewMembership() {
-        System.out.println("Membership renewed for " + planName);
+        try {
+            LocalDate newExpiry = LocalDate.now().plusMonths(duration);
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            this.expiryDate = newExpiry.format(fmt);
+            System.out.println("Membership renewed for plan: " + planName);
+            System.out.println("New Expiry Date: " + this.expiryDate);
+        } catch (Exception e) {
+            System.out.println("ERROR: Renewal failed - " + e.getMessage());
+        }
     }
 }
