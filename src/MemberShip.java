@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+// Updated documentation
 public class MemberShip {
     public int planId;
     public String planName;
@@ -18,9 +18,11 @@ public class MemberShip {
     }
 
     public void createPlan() {
+        
         System.out.println("Plan '" + planName + "' created.");
     }
 
+    
     public void checkExpiry() {
         try {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -54,4 +56,3 @@ public class MemberShip {
     }
 }
 
-// Updated documentation
