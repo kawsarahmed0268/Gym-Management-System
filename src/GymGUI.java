@@ -18,7 +18,7 @@ public class GymGUI extends JFrame {
     private Admin admin = new Admin(1, "admin", "1234");
     private JPanel mainContainer;
     private JPanel loginScreen;
-    private JPanel signupScreen;   // [NEW]
+    private JPanel signupScreen;   
     private JPanel dashboardScreen;
     private JTextArea outputBox;
 
@@ -565,7 +565,6 @@ public class GymGUI extends JFrame {
                     Member attM = null;
                     for (Member m : memberList) if (m.memberId == attMid) { attM = m; break; }
                     if (attM == null) { log("[ERROR] Member ID " + attMid + " not found!"); return; }
-                    // [UPDATED] Attendance auto real-time date and time
                     Attendance att = new Attendance(attendanceList.size() + 1, attMid);
                     attendanceList.add(att);
                     att.checkIn();
